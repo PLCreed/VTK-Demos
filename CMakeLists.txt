@@ -29,6 +29,12 @@ else()
     message("-- Found VTK QT VERSION: Qt${VTK_QT_VERSION}")
 endif()
 
+# rpath
+set(CMAKE_SKIP_BUILD_RPATH FALSE) # 编译时加上RPATH
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) # 编译时RPATH不使用安装的RPATH
+set(CMAKE_INSTALL_RPATH $ORIGIN:$ORIGIN/../:$VTK_DIR/lib) # 安装时加上RPATH
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE) # 安装的执行文件加上RPATH
+
 add_subdirectory(src)
 
 # # CTest
