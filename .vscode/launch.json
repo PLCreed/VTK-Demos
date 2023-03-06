@@ -1,0 +1,47 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // 配置名称,将会在启动配置的下拉菜单中显示
+            "name": "(gdb) Launch",
+            // 配置类型, cppdbg 对应cpptools提供的调试功能, lldb 对应CodeLLDB提供的调试功能
+            "type": "cppdbg",
+            // 请求配置类型,可以为launch（启动）或attach（附加）
+            "request": "launch",
+            // 将要进行调试的程序的路径,Resolved by CMake Tools:
+            "program": "${command:cmake.launchTargetPath}",
+            // 程序调试时传递给程序的命令行参数,一般设为空即可
+            "args": [],
+            // 设为true时程序将暂停在程序入口处,相当于在main上打断点
+            "stopAtEntry": false,
+            // 调试程序时的工作目录,此为工作区文件夹；改成${fileDirname}可变为文件所在目录
+            "cwd": "${workspaceFolder}",
+            // 环境变量
+            "environment": [
+                {
+                    // add the directory where our target was built to the PATHs
+                    // it gets resolved by CMake Tools:
+                    "name": "PATH",
+                    "value": "${env:PATH}:${command:cmake.getLaunchTargetDirectory}"
+                },
+                {
+                    "name": "OTHER_VALUE",
+                    "value": "Something something"
+                }
+            ],
+            "externalConsole": false, // 为true时使用单独的cmd窗口,与其它IDE一致
+            "MIMode": "gdb", // 指定连接的调试器,可以为 gdb 或 lldb
+            "setupCommands": [
+                {
+                    // 模板自带,好像可以更好地显示STL容器的内容,具体作用自行Google
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
