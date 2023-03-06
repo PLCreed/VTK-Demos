@@ -9,4 +9,5 @@ foreach(SOURCE_FILE ${ALL_FILES})
 
   add_executable(${EXAMPLE} ${EXECUTABLE_FLAG} ${EXAMPLE}.cxx)
   target_link_libraries(${EXAMPLE} PRIVATE ${VTK_LIBRARIES} extend)
+  install(TARGETS ${EXAMPLE} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
 endforeach()

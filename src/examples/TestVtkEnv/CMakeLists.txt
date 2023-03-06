@@ -2,10 +2,6 @@ set(Target_Name TestVtkEnv)
 
 project(${Target_Name})
 
-if(NOT VTK_FOUND)
-    message(FATAL_ERROR "${Target_Name} : Unable to find the VTK build folder.")
-endif()
-
 # Header files
 set(HDRS_FILES
 )
