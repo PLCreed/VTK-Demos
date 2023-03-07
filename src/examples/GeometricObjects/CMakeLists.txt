@@ -1,4 +1,4 @@
-project(Animation)
+project(GeometricObjects)
 
 # Build all .cxx files in the directory
 file(GLOB ALL_FILES *.cxx)
