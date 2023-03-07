@@ -155,8 +155,8 @@ int main(int, char *[])
         vtkSmartPointer<vtkLabeledDataMapper> labelMapper = vtkSmartPointer<vtkLabeledDataMapper>::New();
         labelMapper->SetInputData(uGrids[i]);
         vtkSmartPointer<vtkActor2D> labelActor = vtkSmartPointer<vtkActor2D>::New();
-        labelActor->SetMapper(labelMapper);
-        renderers[i]->AddViewProp(labelActor);
+        labelActor->SetMapper(labelMapper.Get());
+        renderers[i]->AddViewProp(labelActor.Get());
 
         // Glyph the points
         vtkSmartPointer<vtkGlyph3DMapper> pointMapper = vtkSmartPointer<vtkGlyph3DMapper>::New();
@@ -166,12 +166,12 @@ int main(int, char *[])
         pointMapper->ScalarVisibilityOff();
 
         vtkSmartPointer<vtkActor> pointActor = vtkSmartPointer<vtkActor>::New();
-        pointActor->SetMapper(pointMapper);
+        pointActor->SetMapper(pointMapper.Get());
         pointActor->GetProperty()->SetDiffuseColor(colors->GetColor3d("Banana").GetData());
         pointActor->GetProperty()->SetSpecular(.6);
         pointActor->GetProperty()->SetSpecularColor(1.0, 1.0, 1.0);
         pointActor->GetProperty()->SetSpecularPower(100);
-        renderers[i]->AddViewProp(pointActor);
+        renderers[i]->AddViewProp(pointActor.Get());
 
         renWin->AddRenderer(renderers[i]);
     }

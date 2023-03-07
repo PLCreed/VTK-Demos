@@ -383,7 +383,7 @@ vtkSmartPointer<vtkUnstructuredGrid> MakeTetrahedron()
     }
 
     vtkNew<vtkCellArray> cellArray;
-    cellArray->InsertNextCell(tetra);
+    cellArray->InsertNextCell(tetra.Get());
 
     vtkSmartPointer<vtkUnstructuredGrid> unstructuredGrid = vtkSmartPointer<vtkUnstructuredGrid>::New();
     unstructuredGrid->SetPoints(points.Get());

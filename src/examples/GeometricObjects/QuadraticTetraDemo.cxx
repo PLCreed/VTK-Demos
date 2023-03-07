@@ -95,7 +95,7 @@ int main(int, char *[])
     textMapper->SetTextProperty(textProperty.Get());
 
     vtkNew<vtkActor2D> textActor;
-    textActor->SetMapper(textMapper);
+    textActor->SetMapper(textMapper.Get());
     textActor->SetPosition(10, 400);
 
     // Visualize

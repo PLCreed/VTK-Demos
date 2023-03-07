@@ -64,7 +64,7 @@ int main(int, char *[])
     /*
     // screenshot code:
     vtkNew<vtkWindowToImageFilter> w2if ;
-    w2if->SetInput(renderWindow);
+    w2if->SetInput(renderWindow.Get());
     w2if->Update();
 
     vtkNew<vtkPNGWriter> writer;

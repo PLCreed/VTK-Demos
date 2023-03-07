@@ -99,21 +99,21 @@ int main(int, char *argv[])
     }
     auto xAxisPolyData = CreateArrow(length, origin, point1);
     vtkNew<vtkPolyDataMapper> xAxisMapper;
-    xAxisMapper->SetInputData(xAxisPolyData);
+    xAxisMapper->SetInputData(xAxisPolyData.Get());
     vtkNew<vtkActor> xAxisActor;
     xAxisActor->SetMapper(xAxisMapper.Get());
     xAxisActor->GetProperty()->SetDiffuseColor(xAxisColor.GetData());
 
     auto yAxisPolyData = CreateArrow(length, origin, point2);
     vtkNew<vtkPolyDataMapper> yAxisMapper;
-    yAxisMapper->SetInputData(yAxisPolyData);
+    yAxisMapper->SetInputData(yAxisPolyData.Get());
     vtkNew<vtkActor> yAxisActor;
     yAxisActor->SetMapper(yAxisMapper.Get());
     yAxisActor->GetProperty()->SetDiffuseColor(yAxisColor.GetData());
 
     auto normalPolyData = CreateArrow(length, origin, normal);
     vtkNew<vtkPolyDataMapper> normalMapper;
-    normalMapper->SetInputData(normalPolyData);
+    normalMapper->SetInputData(normalPolyData.Get());
     vtkNew<vtkActor> normalActor;
     normalActor->SetMapper(normalMapper.Get());
     normalActor->GetProperty()->SetDiffuseColor(normalColor.GetData());

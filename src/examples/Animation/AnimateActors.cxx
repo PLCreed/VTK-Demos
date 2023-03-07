@@ -60,10 +60,10 @@ int main(int argc, char *argv[])
     auto coneMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
     coneMapper->SetInputConnection(coneSource->GetOutputPort());
     auto cone = vtkSmartPointer<vtkActor>::New();
-    cone->SetMapper(coneMapper);
+    cone->SetMapper(coneMapper.Get());
     cone->GetProperty()->SetDiffuseColor(coneColor.GetData());
 
-    ren1->AddActor(cone);
+    ren1->AddActor(cone.Get());
 
     // Create an Animation Scene
     auto scene = vtkSmartPointer<vtkAnimationScene>::New();
