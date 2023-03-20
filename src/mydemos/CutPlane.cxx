@@ -1,4 +1,5 @@
 #include <vtkCellLocator.h>
+#include <vtkClipPolyData.h>
 #include <vtkCutter.h>
 #include <vtkDataSetSurfaceFilter.h>
 #include <vtkDoubleArray.h>
@@ -226,6 +227,33 @@ void VTKImageSlice::getCutPlane(const double *origin, const double *normal, cons
     //     colorMapper->Update();
     //     cutPlane = colorMapper->GetOutput();
     // }
+
+    {
+        // 创建裁剪平面
+        vtkSmartPointer<vtkPlane> plane1 = vtkSmartPointer<vtkPlane>::New();
+        plane1->SetOrigin(225000, 1215500, 47);
+        plane1->SetNormal(normal[0], -normal[1], normal[2]);
+        vtkSmartPointer<vtkPlane> plane2 = vtkSmartPointer<vtkPlane>::New();
+        plane2->SetOrigin(225000, 1215000, 47);
+        plane2->SetNormal(-normal[0], normal[1], normal[2]);
+
+        vtkSmartPointer<vtkClipPolyData> clipPolyData1 = vtkSmartPointer<vtkClipPolyData>::New();
+        clipPolyData1->SetInputData(polyData);
+        clipPolyData1->SetClipFunction(plane1);
+        clipPolyData1->Update();
+
+        vtkSmartPointer<vtkClipPolyData> clipPolyData2 = vtkSmartPointer<vtkClipPolyData>::New();
+        clipPolyData2->SetInputData(clipPolyData1->GetOutput());
+        clipPolyData2->SetClipFunction(plane2);
+        clipPolyData2->Update();
+
+        // 输出切割数据到 VTK 文件
+        vtkSmartPointer<vtkGenericDataObjectWriter> writer = vtkSmartPointer<vtkGenericDataObjectWriter>::New();
+        writer->SetInputData(clipPolyData2->GetOutput());
+        writer->SetFileName("/home/guobin/cut_plane_clip.vtk");
+        writer->SetFileTypeToBinary();
+        writer->Write();
+    }
 
     // 输出切割数据到 VTK 文件
     vtkSmartPointer<vtkGenericDataObjectWriter> writer = vtkSmartPointer<vtkGenericDataObjectWriter>::New();

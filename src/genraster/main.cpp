@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     SliceRasterData *rasterData = new SliceRasterData();
-    rasterData->setResampleMode(QwtMatrixRasterData::ResampleMode::BicubicInterpolation);
+    rasterData->setResampleMode(QwtMatrixRasterData::ResampleMode::BilinearInterpolation);
 
     LinearColorMap *lineColorMap = new LinearColorMap(Qt::darkBlue, Qt::darkRed);
     lineColorMap->addColorStop(0.1, Qt::blue);
