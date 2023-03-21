@@ -1,14 +1,20 @@
 #------------------------------- GuoBin's Clang-Format Style Options -------------------------------
 #
-#LLVM版本: 14
+#clang-format 版本: 15.0
 #创建时间: 2019-05-08
-#修改时间: 2023-02-28
+#修改时间: 2023-03-20
 #说明:
 # 字段属性参照: clang-format官方文档: https://clang.llvm.org/docs/ClangFormatStyleOptions.html
 #             中文注释参照: https://www.jianshu.com/p/5dea6bdbbabb
 #                          https://blog.csdn.net/tiandyoin/article/details/126654053
-#
-# Google Style: https://google.github.io/styleguide/cppguide.html
+# 编码规范:
+# - LLVM: https://llvm.org/docs/CodingStandards.html
+# - Google: https://google.github.io/styleguide/cppguide.html
+# - Chromium: https://chromium.googlesource.com/chromium/src/+/refs/heads/main/styleguide/styleguide.md
+# - Mozilla: https://firefox-source-docs.mozilla.org/code-quality/coding-style/index.html
+# - WebKit: https://www.webkit.org/coding/coding-style.html
+# - Microsoft: https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference
+# - GNU: https://www.gnu.org/prep/standards/standards.html
 #
 #---------------------------------------------------------------------------------------------------
 
@@ -138,7 +144,7 @@ AlignEscapedNewlines: Right
 # OAS_DontAlign          (文件配置项: DontAlign         ) 不对齐。
 # OAS_Align              (文件配置项: Align             ) 水平对齐操作数。设置 BreakBeforeBinaryOperators 时，运算符换行并与第一行的操作数对齐。
 # OAS_AlignAfterOperator (文件配置项: AlignAfterOperator) 水平对齐操作符。设置 BreakBeforeBinaryOperators 时，运算符会缩进，导致无法对齐。
-AlignOperands: DontAlign
+AlignOperands: Align
 
 # 说明: 对齐行尾注释。
 AlignTrailingComments: true
@@ -367,7 +373,7 @@ BreakConstructorInitializersBeforeComma: false
 # BILS_BeforeComma (文件配置项: BeforeComma) 在冒号(Colon)和逗号(Comma)之前换行并对齐冒号(Colon)和逗号(Comma)。
 # BILS_AfterColon  (文件配置项: AfterColon ) 在冒号(Colon)和逗号(Comma)之后换行。
 # BILS_AfterComma  (文件配置项: AfterComma ) 仅在逗号(Comma)之后换行。
-BreakInheritanceList: BeforeColon
+BreakInheritanceList: AfterColon
 
 # 说明: 字符串(String)的每一个字面量(Literal)都单独一行。
 # 列1:
@@ -384,7 +390,7 @@ ColumnLimit: 120
 #       该项要写在代码文件中。
 # 类型: String
 # 例1:
-# CommentPragmas: '^ Comment pragma: keep'
+# CommentPragmas: '^ Comment pragma: keep'  "^ IWYU pragma:"
 # #include <vector> // Comment pragma: keep
 # 把这个字符串写在注释里，该行不会被格式化。
 CommentPragmas: ""
@@ -621,7 +627,7 @@ IndentWrappedFunctionNames: true
 # 说明: 指定是否在控制语句之后插入大括号。
 #       控制语句如: if、else、for、while、try、do、switch、case、default...
 # 版本: 15.0.0
-InsertBraces: true
+InsertBraces: false
 
 # 说明: 指定是否插入末尾逗号。
 #       它目前仅适用于JavaScript。
@@ -690,13 +696,13 @@ PackConstructorInitializers: NextLine
 
 # 说明: 赋值运算符因发生折行而换行的“违规”行为时的罚分。
 #       当罚分设置比较高, clang-format将优先考虑不换行。
-# PenaltyBreakAssignment: 2
+PenaltyBreakAssignment: 6
 
 # 说明: 函数调用中因在第一个参数前发生折行而换行时的罚分。
 # PenaltyBreakBeforeFirstCallParameter: 1
 
-# 说明: 因在每一行注释发生折行而换行时的罚分。
-# PenaltyBreakComment: 300
+# 说明: 因在每一行注释发生折行而换行时的罚分。1000000000
+PenaltyBreakComment: 0
 
 # 说明: 因在 << 前发生折行而换行时的罚分。
 # PenaltyBreakFirstLessLess: 120
@@ -727,7 +733,7 @@ PackConstructorInitializers: NextLine
 # PAS_Left   (文件配置项: Left  ) 指针向左紧贴类型。
 # PAS_Right  (文件配置项: Right ) 指针向右紧贴变量。
 # PAS_Middle (文件配置项: Middle) 指针居中两边留空。
-PointerAlignment: Right
+PointerAlignment: Left
 
 # 说明: 预处理语句的缩进字符数。
 #       当设置为 -1(默认)时, IndentWidth 也用于预处理器语句。
@@ -861,7 +867,7 @@ RequiresClausePosition: OwnLine
 # SDS_Leave  (文件配置项: Leave ) 保留原样。
 # SDS_Always (文件配置项: Always) 插入空行。
 # SDS_Never  (文件配置项: Never ) 移除空行。
-SeparateDefinitionBlocks: Always
+SeparateDefinitionBlocks: Leave
 
 # 说明: 短命名空间跨越的最大非折行行数，默认为 1。
 #       低于此值的被视为短命名空间。计算短命名空间的两个大括号 {} 内的部分, 不包括空行。
@@ -901,7 +907,7 @@ SpaceAroundPointerQualifiers: Default
 SpaceBeforeAssignmentOperators: true
 
 # 说明: Case 语句的冒号(Colon)之前是否有空格。
-SpaceBeforeCaseColon: true
+SpaceBeforeCaseColon: false
 
 # 说明: 在 C++11 的初始化列表的大括号之前是否有空格。
 SpaceBeforeCpp11BracedList: true
@@ -1005,7 +1011,9 @@ SpacesInSquareBrackets: false
 
 # 说明: 指明某些类似变量声明前的类型应被解析为宏。
 #       比如 Qts 里的宏 emit, 如果不指明，会被认为是类型(type), 像 int 等。
-StatementAttributeLikeMacros: [emit]
+StatementAttributeLikeMacros:
+  - Q_EMIT
+  - emit
 
 # 说明: 表示应该被解析为完整语句的宏数组。
 #       典型的宏是表达式，需要加分号；有时情况并非如此，这可以让 clang-format 了解这种情况。
@@ -1060,7 +1068,6 @@ Standard: Auto
 
 # 说明: 大括号(Braces)的换行方式。
 BreakBeforeBraces: Custom
-
 # 说明: 每个单独的大括号的换行方式，当 BreakBeforeBraces 设置为 BS_Custom 时生效。
 BraceWrapping:
   AfterCaseLabel: false
